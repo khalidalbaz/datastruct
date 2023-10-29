@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Define the structure for a student node
+struct Student {
+    int student_number;
+    char name[50];
+    int age;
+    struct Student* next;
+};
+
+// Function to add a student to the beginning of the list
+struct Student* addStudent(struct Student* head, int student_number, const char* name, int age) {
+    struct Student* newStudent = (struct Student*)malloc(sizeof(struct Student));
+    newStudent->student_number = student_number;
+    strcpy(newStudent->name, name);
+    newStudent->age = age;
+    newStudent->next = head;
+    return newStudent;
+}
+
+// Function to sort the list by student numbers in descending order
+void sortStudents(struct Student* head) {
+    // ... (same as previous code)
+}
+
+// Function to print student information
+void printStudents(struct Student* head) {
+    // ... (same as previous code)
+}
+
+// Function to search for a student by name and return the corresponding node
+struct Student* searchStudentByName(struct Student* head, const char* name) {
+    // ... (same as previous code)
+}
+
+// Function to delete the next node after the node with the searched student name
+void deleteNextNode(struct Student* head, const char* name) {
+    // ... (same as previous code)
+}
+
+// Function to find and print the longest name
+void printLongestName(struct Student* head) {
+    // ... (same as previous code)
+}
+
+int main() {
+    struct Student* head = NULL;
+
+    int choice;
+    while (1) {
+        printf("\nStudent Database Menu:\n");
+        printf("1. Add Student\n");
+        printf("2. Sort Students\n");
+        printf("3. Print Student List\n");
+        printf("4. Search by Student Name\n");
+        printf("5. Delete Next Node\n");
+        printf("6. Find Longest Name\n");
+        printf("7. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: // Add Student
+                int student_number;
+                char name[50];
+                int age;
+                printf("Enter student information (Student Number, Name, Age) or -1 to return to the menu:\n");
+                while (1) {
+                    scanf("%d", &student_number);
+                    if (student_number == -1) {
+                        break;
+                    }
+                    scanf("%s %d", name, &age);
+                    head = addStudent(head, student_number, name, age);
+                }
+                break;
+            case 2: // Sort Students
+                sortStudents(head);
+                printf("Student list sorted by student number in descending order.\n");
+                break;
+            case 3: // Print Student List
+                printf("Student List:\n");
+                printStudents(head);
+                break;
+            case 4: // Search by Student Name
+                printf("Enter a name to search: ");
+                scanf("%s", name);
+                struct Student* foundStudent = searchStudentByName(head, name);
+                if (foundStudent != NULL) {
+                    printf("Student Found: %d- %s %d\n", foundStudent->student_number, foundStudent->name, foundStudent->age);
+                } else {
+                    printf("Student not found.\n");
+                }
+                break;
+            case 5: // Delete Next Node
+                printf("Enter a name to search and delete the next node: ");
+                scanf("%s", name);
+                deleteNextNode(head, name);
+                printf("Next node after %s deleted (if it exists).\n", name);
+                break;
+            case 6: // Find Longest Name
+                printf("Longest Name:\n");
+                printLongestName(head);
+                break;
+            case 7: // Exit
+                printf("Exiting the program.\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
